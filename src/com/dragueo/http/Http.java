@@ -1,6 +1,7 @@
 package com.dragueo.http;
 
 import java.io.File;
+import java.util.Base64;
 import java.util.Properties;
 
 import org.apache.http.HttpEntity;
@@ -68,16 +69,19 @@ public class Http {
 		HttpClient httpclient = new DefaultHttpClient(cm, params);
 		httpclient.getParams().setParameter("http.socket.timeout", new Integer(Integer.parseInt(prop.getProperty("httptimeout", "2000"))));
 		
-		String url = prop.getProperty("url","http://www.dragueo.com/dragtree/putTimeV2.php");
+		String url = prop.getProperty("url");
 		url = url + "?code=" + code;
 		if("true".equals(Prop.loadProp().getProperty("checkTest"))) {
 			url = url + "&test=true";
 		}
 		HttpPost request = new HttpPost(url);
 		
+		String userPassword = prop.getProperty("http.user", "") + ":" + prop.getProperty("http.pass", "");
+        String encodeBase64 = Base64.getEncoder().encodeToString(userPassword.getBytes());
+        
+        request.addHeader("Authorization", "Basic " + encodeBase64);
 		request.setHeader("User-Agent", "dragtree");
-		request.setHeader("Accept", 
-	             "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8");
+		request.setHeader("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8");
 
         HttpResponse response = null; 
         int resp = 0;
@@ -131,9 +135,12 @@ public class Http {
 		}
 		HttpGet request = new HttpGet(url);
 		
+		String userPassword = prop.getProperty("http.user", "") + ":" + prop.getProperty("http.pass", "");
+        String encodeBase64 = Base64.getEncoder().encodeToString(userPassword.getBytes());
+        
+        request.addHeader("Authorization", "Basic " + encodeBase64);
 		request.setHeader("User-Agent", "dragtree");
-		request.setHeader("Accept", 
-	             "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8");
+		request.setHeader("Accept", "text/html,application/xhtml+xml,application/xml;q=0.9,*/*;q=0.8");
 
         HttpResponse response = null; 
         int resp = 0;
