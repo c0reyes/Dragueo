@@ -100,19 +100,9 @@ public class DragueoConfiguracion extends JDialog {
 		lines.setColumns(10);
 		JSeparator separator = new JSeparator();
 		contentPanel.add(separator, "2, 8, 3, 1");
-		
-		checkDump = new Checkbox("Dump");
-		contentPanel.add(checkDump, "4, 12");
 
-		checkDebug = new Checkbox("Debug");
-		contentPanel.add(checkDebug, "4, 14");
-		
-		checkTest = new Checkbox("Test");
-		contentPanel.add(checkTest, "4, 16");
-		
 		checkStartup = new Checkbox("Start on startup");
-		contentPanel.add(checkStartup, "4, 18");
-			
+		contentPanel.add(checkStartup, "4, 10");
 		
 		JPanel buttonPane = new JPanel();
 		buttonPane.setLayout(new FlowLayout(FlowLayout.RIGHT));
@@ -145,21 +135,6 @@ public class DragueoConfiguracion extends JDialog {
 		}
 		if(prop.getProperty("lines") != null) {
 			lines.setText(prop.getProperty("lines"));
-		}
-		if(prop.getProperty("checkDump") != null) {
-			if("true".equals(prop.getProperty("checkDump"))) {
-				checkDump.setState(true);
-			}
-		}
-		if(prop.getProperty("checkDebug") != null) {
-			if("true".equals(prop.getProperty("checkDebug"))) {
-				checkDebug.setState(true);
-			}
-		}
-		if(prop.getProperty("checkTest") != null) {
-			if("true".equals(prop.getProperty("checkTest"))) {
-				checkTest.setState(true);
-			}
 		}
 		if(prop.getProperty("checkStartup") != null) {
 			if("true".equals(prop.getProperty("checkStartup"))) {
@@ -201,10 +176,7 @@ public class DragueoConfiguracion extends JDialog {
 			}else{
 				prop.setProperty("com", comboBox.getSelectedItem().toString());
 			}
-			
-			prop.setProperty("checkDump","" + checkDump.getState());
-			prop.setProperty("checkDebug","" + checkDebug.getState());
-			prop.setProperty("checkTest","" + checkTest.getState());
+
 			prop.setProperty("checkStartup","" + checkStartup.getState());
 			
 			if(!"".equals(msg)) {

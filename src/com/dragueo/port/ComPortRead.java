@@ -76,7 +76,7 @@ public class ComPortRead extends Thread implements SerialPortEventListener {
         	log.info("Directory tmp: " + output_tmp);
         	
         	textArea.append("ComPortRead - Port: " + com + "\n");
-        	textArea.append("ComPortRead - Directory tmp: " + output_tmp + "\n");
+        	textArea.append("ComPortRead - Directory temporary: " + output_tmp + "\n");
         	
         	String comtest = Prop.loadProp().getProperty("comTest");
         	if(comtest != null) {
@@ -104,7 +104,6 @@ public class ComPortRead extends Thread implements SerialPortEventListener {
 	                        serialPort.notifyOnOverrunError(true);
 	                        serialPort.notifyOnRingIndicator(true);
                         }
-                        //bufferedReader = new BufferedReader(new InputStreamReader(serialPort.getInputStream()));
                         inputStream = serialPort.getInputStream();
                     }
                 }
@@ -153,7 +152,6 @@ public class ComPortRead extends Thread implements SerialPortEventListener {
         		if(Prop.loadProp().getProperty("checkDebug","false").equals("true")) {
         			log.info("Output buffer is empty.");
         		}
-        		/* Posible modificacion para envia de archivo */
         		break;
             case SerialPortEvent.DATA_AVAILABLE: 		// Data available at the serial port.
                 try {

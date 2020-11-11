@@ -64,7 +64,7 @@ public class Tickets extends Thread {
 		log.info("Directory tmp: " + output_tmp);
 		log.info("Directory done: " + output_done);
 		
-		textArea.append("Tickets - Directory tmp: " + output_tmp + "\n");
+		textArea.append("Tickets - Directory temporary: " + output_tmp + "\n");
 		textArea.append("Tickets - Directory done: " + output_done + "\n");
 		
 		File actual = new File(output_tmp);
@@ -123,12 +123,14 @@ public class Tickets extends Thread {
 					ImageIcon status = null;
 					
 					if( tmp == -1 ) {
-						f.renameTo(new File(output_done + "\\" + f.getName()));
+						//f.renameTo(new File(output_done + "\\" + f.getName()));
+						f.delete();
 						log.info("ticket: " + f.getName() + " ERROR");
 						
 						status = DragueoImg.Image("nogo.png",16);
 					} else if( tmp == 200) {
-						f.renameTo(new File(output_done + "\\" + f.getName()));
+						//f.renameTo(new File(output_done + "\\" + f.getName()));
+						f.delete();
 						log.info("ticket: " + f.getName() + " OK");
 						
 						connectionBar.setValue(100);

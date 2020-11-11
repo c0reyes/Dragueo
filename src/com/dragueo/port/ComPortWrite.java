@@ -28,7 +28,6 @@ public class ComPortWrite {
             if (portId.getPortType() == CommPortIdentifier.PORT_SERIAL) {
                  if (portId.getName().equals(com)) {
                 	 for (String line : text.split("\\n")) {
-                		 //log.info("--> " + line);
 	                    try {
 	                        serialPort = (SerialPort)
 	                        portId.open("Dragueo ComPortWrite", 2000);
@@ -44,8 +43,6 @@ public class ComPortWrite {
 	                    } catch (UnsupportedCommOperationException e) {System.out.println(e);}
 	                    try { 
 	            				outputStream.write(line.getBytes());
-	            				//outputStream.write(13);
-	            				//outputStream.write(4);
 	                    } catch (IOException e) {System.out.println(e);}
 	                    serialPort.close();
 	                    try {
