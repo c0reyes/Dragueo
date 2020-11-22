@@ -80,16 +80,16 @@ public class Tickets extends Thread {
 						try {
 							filereader = new FileReader(f);
 						} catch (FileNotFoundException e) {
-							log.info(e.toString());
+							log.error(e.toString());
 							textArea.append(e.toString() + "\n");
 						}
 						
 						string_query = timeparse.parse(filereader);
-						
+
 						try {
 							filereader.close();
 						} catch (IOException e) {
-							log.info(e.toString());
+							log.error(e.toString());
 							textArea.append(e.toString() + "\n");
 						}
 	        		}

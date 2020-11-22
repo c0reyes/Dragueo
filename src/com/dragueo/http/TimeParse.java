@@ -5,6 +5,8 @@ import java.text.SimpleDateFormat;
 import java.util.Date;
 import java.util.Hashtable;
 
+import org.apache.log4j.Logger;
+
 
 public class TimeParse {
 	static Hashtable<String, String> months = new Hashtable<String, String>();
@@ -21,6 +23,7 @@ public class TimeParse {
 	static String first = "";
 	static String status = "";
 	static String fecha = "";
+	private static Logger log = Logger.getLogger(TimeParse.class);
 	
 	public TimeParse() {
 		months.put("Enero", "01");
@@ -89,25 +92,77 @@ public class TimeParse {
 				}
 			} 
 		} catch (Exception e) {
-			e.printStackTrace();
+			log.error(e.toString(), e);
 		}
-
+		
 		try {
-			return "entry=" + entry.trim() 
-				+ "&tree_speed=" + tree_speed.trim()
-				+ "&dialin=" + dialin.trim()
-				+ "&reaction=" + reaction.trim()
-				+ "&ft60=" + ft60.trim()
-				+ "&ft330=" + ft330.trim()
-				+ "&ft660=" + ft660.trim()
-				+ "&mph1=" + mph1.trim()
-				+ "&ft1320=" + ft1320.trim()
-				+ "&mph=" + mph.trim()
-				+ "&first=" + first.trim()
-				+ "&status=" + status.trim()
-				+ "&fecha=" + fecha.replaceAll(" ","%20").trim();
+			String r = "";
+			
+			if(entry.trim().split(":").length > 0) {
+				r += "entryLeft=" + (entry.trim().split(":"))[0]
+				 + "&entryRight=" + (entry.trim().split(":"))[1];
+			}
+			
+			if(tree_speed.trim().split(":").length > 0) {
+				r += "&treespeedLeft=" + (tree_speed.trim().split(":"))[0]
+				 + "&treespeedRight=" + (tree_speed.trim().split(":"))[1];
+			}
+						 
+			if(dialin.trim().split(":").length > 0) {			
+				r += "&dialinLeft=" + (dialin.trim().split(":"))[0]
+				 + "&dialinRight=" + (dialin.trim().split(":"))[1];
+			}
+			
+			if(reaction.trim().split(":").length > 0) {
+				r += "&reactionLeft=" + (reaction.trim().split(":"))[0]
+				 + "&reactionRight=" + (reaction.trim().split(":"))[1];
+			}
+			
+			if(ft60.trim().split(":").length > 0) {
+				r += "&ft60Left=" + (ft60.trim().split(":"))[0]
+				 + "&ft60Right=" + (ft60.trim().split(":"))[1];
+			}
+			
+			if(ft330.trim().split(":").length > 0) {
+				r += "&ft330Left=" + (ft330.trim().split(":"))[0]
+				 + "&ft330Right=" + (ft330.trim().split(":"))[1];
+			}
+			
+			if(ft660.trim().split(":").length > 0) {
+				r += "&ft660Left=" + (ft660.trim().split(":"))[0]
+				 + "&ft660Right=" + (ft660.trim().split(":"))[1];
+			}
+			
+			if(mph1.trim().split(":").length > 0) {
+				r += "&mph1Left=" + (mph1.trim().split(":"))[0]
+				 + "&mph1Right=" + (mph1.trim().split(":"))[1];
+			}
+			
+			if(ft1320.trim().split(":").length > 0) {
+				r += "&ft1320Left=" + (ft1320.trim().split(":"))[0]
+				 + "&ft1320Right=" + (ft1320.trim().split(":"))[1];		 
+			}
+			
+			if(mph.trim().split(":").length > 0) {
+				r += "&mphLeft=" + (mph.trim().split(":"))[0]
+				 + "&mphRight=" + (mph.trim().split(":"))[1];
+			}
+			
+			if(first.trim().split(":").length > 0) {
+				r += "&firstLeft=" + (first.trim().split(":"))[0]
+				 + "&firstRight=" + (first.trim().split(":"))[1];
+			}
+			
+			if(status.trim().split(":").length > 0) {
+				r += "&statusLeft=" + (status.trim().split(":"))[0]
+				 + "&statusRight=" + (status.trim().split(":"))[1];
+			}
+				 
+			r += "&fecha=" + fecha.replaceAll(" ","%20").trim();
+			
+			return r;
 		}catch(Exception e) {
-			e.printStackTrace();
+			log.error(e.toString(), e);
 			return null;
 		}
 	}
